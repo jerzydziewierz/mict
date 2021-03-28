@@ -297,7 +297,7 @@ Much of the actual research code will use numpy arrays or long lists. These are 
 
 
 ```python
-
+from mict import mict
 import numpy
 q=mict(small_array=numpy.array([1,2,3,4,5]),reprstyler_html=None) # reprstyler_html is enabled by default to `reprstyler_basic_html`.
 q
@@ -305,15 +305,19 @@ q
 
 
 
-
+```python
 {'small_array': array([1, 2, 3, 4, 5]), 'reprstyler_html': None}
+```
 
 
 
 
 ```python
-q.large_array=numpy.random.random((150,150))
+from mict import mict
 from mict import reprstyler_basic_html
+import numpy
+
+q.large_array=numpy.random.random((150,150))
 q.reprstyler_html = reprstyler_basic_html  # set back to the provided function
 q
 ```
@@ -332,7 +336,8 @@ Only when stabilizing the implementation, you will want to prune the result and 
 
 
 ```python
- # define a function
+from mict import mict
+# define a function
 def do_maths(x=1,y=2):
     a=x+y
     b=a*x
@@ -363,6 +368,7 @@ Note that `reprstyler_basic_html` is merely another function from the `mict` mod
 
 
 ```python
+from mict import mict
 x=mict(type='x-coordinate', value=3)
 y=mict(type='y-coordinate', value=5)
 point=mict(name='example', x=x,y=y)
@@ -437,8 +443,6 @@ point.pop('x')
 
 <div>
 <em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table></div>
-
-
 
 
 ```python
@@ -518,22 +522,23 @@ q
 
 
 ```python
-def basic_html_styler(this):
+def custom_html_styler(this):
     output = f'<h1>{this.title}</h1>'
     output = f'{output}<h2>{this.subtitle}</h2>'
     output = f'{output}<p>interesting integer:{this.interesting_integer:04d}</p>'
     output = f'{output}<p>interesting float:{this.interesting_float:0.{this.interesting_integer}f}</p>'
+    output = f'{output}<p>some stats: {this.big_array.std()=:0.4f}</p>'
     output = f'{output}<hr/>'
     return output
 
-q.reprstyler_html = basic_html_styler
+q.reprstyler_html = custom_html_styler
 q
 ```
 
 
 
 
-<div><h1>some title</h1><h2>some subtitle</h2><p>interesting integer:0003</p><p>interesting float:6.283</p><hr/></div>
+<div><h1>some title</h1><h2>some subtitle</h2><p>interesting integer:0003</p><p>interesting float:6.283</p><p>some stats: this.big_array.std()=0.2897</p><hr/></div>
 
 
 
