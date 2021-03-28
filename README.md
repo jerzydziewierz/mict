@@ -10,15 +10,18 @@ It does a bit more than basic `dict`, but does not attempt to superseede pandas,
 
 ## Installation
 
-try installing with `pip`, grabbing it straight from git:
+Try installing with `pip`, grabbing it straight from `github`:
     
 ```bash
-    python -m pip install git+https://github.com/<username>/<repo_name>.git#egg=commontools
+    python -m pip install -U git+https://github.com/jerzydziewierz/mict.git#egg=commontools
 ```
 
 
 >  Note: the `#egg=commontools` provides better compatibility in case if you want to use `mict` in your own package as a dependency.
 
+
+
+This package attempts to use [PEP 517](https://www.python.org/dev/peps/pep-0517)  and it's implementation, [setuptools Quickstart — setuptools 54.2.0 documentation](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
 
 ## Basic usage
 
