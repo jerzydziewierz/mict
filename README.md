@@ -217,6 +217,8 @@ q.reprstyler_html=lambda this:f'<svg width="200" height="100" ><circle cx="50" c
 q
 ```
 
+![image-20210328194624321](README.assets/image-20210328194624321.png)
+
 
 
 
@@ -234,6 +236,8 @@ q
 
 
 <div><svg width="200" height="100" ><circle cx="50" cy="50" r="32" fill="red" /></svg></div>
+
+![image-20210328194642747](README.assets/image-20210328194642747.png)
 
 
 
