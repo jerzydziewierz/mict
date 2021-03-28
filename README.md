@@ -6,10 +6,12 @@ Provides `MATLAB`-like setting/storage of items in a `dict` (dictionary) and a h
 
 It does a bit more than basic `dict`, but does not attempt to supersede pandas, numpy nor other advanced data storage tools
 
-{:toc}
 
 
-## Installation
+[TOC]
+
+
+# Installation
 
 Try installing with `pip`, grabbing it straight from `github`:
     
@@ -40,7 +42,7 @@ python -m pip -e .
 
 This package attempts to use [PEP 517](https://www.python.org/dev/peps/pep-0517)  and it's implementation, [setuptools Quickstart — setuptools 54.2.0 documentation](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
 
-## Basic usage
+# Basic usage
 
 Always remember that `mict` inherits from `dict` and hence, all the operations that are valid for `dict` are also valid for `mict`. On top of that, new operations are available.
 
@@ -187,8 +189,7 @@ q
 
 
 
-
-<h4>✅high baldness score: 6.280</h4>
+<div><b>✅high baldness score: 6.280</b></div>
 
 
 
@@ -199,9 +200,7 @@ q
 ```
 
 
-
-
-<h4>❌not bald enough: 3.100</h4>
+<div><b>❌not bald enough: 3.100</b></div>
 
 
 
@@ -221,7 +220,7 @@ q
 
 
 
-<svg width="200" height="100" ><circle cx="50" cy="50" r="15" fill="blue" /></svg>
+<div><svg width="200" height="100" ><circle cx="50" cy="50" r="15" fill="blue" /></svg></div>
 
 
 
@@ -234,8 +233,7 @@ q
 
 
 
-
-<svg width="200" height="100" ><circle cx="50" cy="50" r="32" fill="red" /></svg>
+<div><svg width="200" height="100" ><circle cx="50" cy="50" r="32" fill="red" /></svg></div>
 
 
 
