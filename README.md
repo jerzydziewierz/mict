@@ -13,7 +13,7 @@ It does a bit more than basic `dict`, but does not attempt to superseede pandas,
 Try installing with `pip`, grabbing it straight from `github`:
     
 ```bash
-    python -m pip install -U git+https://github.com/jerzydziewierz/mict.git#egg=commontools
+python -m pip install -U git+https://github.com/jerzydziewierz/mict.git#egg=mict
 ```
 
 
@@ -21,9 +21,29 @@ Try installing with `pip`, grabbing it straight from `github`:
 
 
 
+To uninstall, the symmetric command is:
+
+```bash
+python -m pip uninstall mict
+```
+
+
+
+Otherwise, for a development mode editable local installation, try cloning the files from the repo to your favourite folder, and then try, from inside the root folder of the repo (where the `setup.py` is )
+
+```bash
+python -m pip -e .
+```
+
+
+
 This package attempts to use [PEP 517](https://www.python.org/dev/peps/pep-0517)  and it's implementation, [setuptools Quickstart — setuptools 54.2.0 documentation](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
 
 ## Basic usage
+
+Always remember that `mict` inherits from `dict` and hence, all the operations that are valid for `dict` are also valid for `mict`. On top of that, new operations are available.
+
+
 
 
 ```python
@@ -41,7 +61,7 @@ q
 
 ---
 
-The key power of mict is the ease of adding, removing, altering the contents -- and the the nice visualisation of them.
+The first power of `mict` is the ease of adding, removing, altering the contents -- and the the nice visualisation of them.
 
 You can add new keys easily, and then access them using dot-notation:
 
@@ -62,12 +82,15 @@ q
 
 The visualiser function in `mict` is called `reprstyler`.
 
-A new `mict` instance comes with the `reprstyler_html` already set to `reprstyler_basic_html` but you can, and should make your own reprstylers.
+A new `mict` instance comes with the `reprstyler_html` already set to `reprstyler_basic_html` but you can, and should make your own reprstylers -- see below on how to do that.
 
 
-## Convinence save and load functions using pickle
+## Convenience save and load functions using pickle
 
-methods `to_pickle` and `from_pickle` work as you would expect:
+> **Warning**: Since the `pickle` save/load also loads executable functions (including the `reprstyler`), all the precautions that apply to `pickle` apply here. Loading untrusted files is potentially unsafe. 
+
+
+methods `(instance).to_pickle()` and `(class).from_pickle()` work as you would expect:
 
 
 ```python
@@ -83,11 +106,12 @@ q1=mict.from_pickle('demo.pickle')
 q1
 ```
 
-
-
 <div><br/><table><tr><th>key</th><th>value</th></tr><tr><td>first</td> <td> Hello world!</td> </tr> <tr><td>second</td> <td> not</td> </tr> <tr><td>third</td> <td> 3</td> </tr>  </table></div>
 
+
+
 ---
+## Casting to pure `dict`
 
 `mict` under the hood is really a `dict` with some extra handlers
 
@@ -104,11 +128,9 @@ dict(q)
 
 
 
-> **Warning**: Since the save/load also loads functions (incl.`reprstyler`), all the precautions that apply to `pickle` apply here. Loading untrusted functions is potentially unsafe.
-
 ## Customizing the reprstyler 
 
-This is the real reason why I developed `mict`: I wanted a quick and simple way to customize how the contents of the dictionary are visualized.
+This is the real reason why I developed `mict`, and a primary value proposition. `mict` provides a quick and simple way to customize how the contents of the dictionary are visualized:
     
 
 
@@ -131,7 +153,7 @@ baldness score: 6.280
 
 ---
 
-As everything in `mict`, the reprstyler can be changed **after** initializing the `mict` storage itself
+As everything in `mict`, the reprstyler can and should be changed **after** initializing the `mict` storage itself
 
 
 ```python
@@ -152,9 +174,6 @@ q
 ```python
 keys:   zap=None; bald=6.28; hidden_value1=45;
 ```
-
-
-then, if you want a different styler for jupyter, and a different one for text-only, you can (optionally) override the `reprstyler` with `reprstyler_html`. It will only be used if `_repr_html_` is called -- as `jupyter` first tries to call that first
 
 
 
@@ -246,11 +265,17 @@ q
 
 ```
 
----
+If you want a different styler for `jupyter`, and a different one for `console-only`, you can (optionally) override the `reprstyler` rather than `reprstyler_html`. The latter will only be used if `_repr_html_` is called -- as `jupyter` first tries to call that first; the former is the default called by the console-only `IPython`
 
-## Note
 
-If you really feel like it, this could be extended to markdown, png, svg and other visualizers supported by jupyter.
+
+![image-20210328192335485](README.assets/image-20210328192335485.png)
+
+
+
+## Other output formats
+
+If you really feel like it, this could be extended to markdown, png, svg and other visualizers supported by `jupyter`.
 
 
 Importantly, you can still see the classic `dict` __repr__ function (lists all keys/values) using
@@ -292,12 +317,9 @@ q
 
 
 
-
-<br/><table><tr><th>key</th><th>value</th></tr><tr><td>small_array</td> <td> np.array(shape=(5,)) </td> </tr> <tr><td>large_array</td> <td> np.array(shape=(150, 150)) </td> </tr>  </table>
-
+<div><br/><table><tr><th>key</th><th>value</th></tr><tr><td>small_array</td> <td> np.array(shape=(5,)) </td> </tr> <tr><td>large_array</td> <td> np.array(shape=(150, 150)) </td> </tr>  </table></div>
 
 
-# Advanced uses
 
 ## Capture locals from inside the function and return them in a `dict` / `mict` 
 
@@ -325,12 +347,8 @@ demo_result
 
 
 
+<div><br/><table><tr><th>key</th><th>value</th></tr><tr><td>x</td> <td> 4</td> </tr> <tr><td>y</td> <td> 2</td> </tr> <tr><td>a</td> <td> 6</td> </tr> <tr><td>c</td> <td> 48</td> </tr>  </table></div>
 
-<br/><table><tr><th>key</th><th>value</th></tr><tr><td>x</td> <td> 4</td> </tr> <tr><td>y</td> <td> 2</td> </tr> <tr><td>a</td> <td> 6</td> </tr> <tr><td>c</td> <td> 48</td> </tr>  </table>
-
-
-
-# Advanced uses
 
 ## Nested dictionary use and special attributes
 
@@ -353,9 +371,8 @@ x
 ```
 
 
-
-
-<em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table>
+<div>
+<em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table></div>
 
 
 
@@ -366,9 +383,8 @@ y
 
 
 
-
-<em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table>
-
+<div>
+<em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></div>
 
 
 
@@ -378,8 +394,8 @@ point
 
 
 
-
-<em>Name:</em> example;<br/><table><tr><th>key</th><th>value</th></tr><tr><td>x</td><td><em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table></td> </tr> <tr><td>y</td><td><em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></td> </tr>  </table>
+<div>
+<em>Name:</em> example;<br/><table><tr><th>key</th><th>value</th></tr><tr><td>x</td><td><em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table></td> </tr> <tr><td>y</td><td><em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></td> </tr>  </table></div>
 
 
 
@@ -416,8 +432,8 @@ point.pop('x')
 
 
 
-
-<em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table>
+<div>
+<em>Type:</em> x-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 3</td> </tr>  </table></div>
 
 
 
@@ -426,10 +442,8 @@ point.pop('x')
 point
 ```
 
-
-
-
-<br/><table><tr><th>key</th><th>value</th></tr><tr><td>y</td><td><em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></td> </tr>  </table>
+<div>
+<br/><table><tr><th>key</th><th>value</th></tr><tr><td>y</td><td><em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></td> </tr>  </table></div>
 
 
 
@@ -440,13 +454,13 @@ v=point._repr_html_()
 v
 ```
 
+.
 
+```python
+'<br/><table><tr><th>key</th><th>value</th></tr><tr><td>y</td><td><em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></td> </tr>  </table>'
+```
 
-
-    '<br/><table><tr><th>key</th><th>value</th></tr><tr><td>y</td><td><em>Type:</em> y-coordinate; <br/><table><tr><th>key</th><th>value</th></tr><tr><td>value</td> <td> 5</td> </tr>  </table></td> </tr>  </table>'
-
-
-
+.
 
 ```python
 # reset the reprstyler to not generate anything.
@@ -458,12 +472,11 @@ point.reprstyler_html=None
 point
 ```
 
-
-
-
+```python
 {'y': {'type': 'y-coordinate', 'value': 5, 'reprstyler_html': <function reprstyler_basic_html at 0x0000017980D26310>}, 'reprstyler_html': None}
+```
 
-
+.
 
 
 ```python
@@ -471,23 +484,16 @@ point
 isinstance(point,mict)
 ```
 
-
-
-
-    True
-
-
-
+```python
+True
+```
 
 ```python
 isinstance(point,dict)
 ```
 
 
-
-
     True
-
 
 
 ## More examples
@@ -503,8 +509,7 @@ q
 
 
 
-
-<br/><table><tr><th>key</th><th>value</th></tr><tr><td>title</td> <td> some title</td> </tr> <tr><td>subtitle</td> <td> some subtitle</td> </tr> <tr><td>interesting_integer</td> <td> 3</td> </tr> <tr><td>interesting_float</td> <td> 6.283185307179586</td> </tr> <tr><td>big_array</td> <td> np.array(shape=(200, 250)) </td> </tr>  </table>
+<div><br/><table><tr><th>key</th><th>value</th></tr><tr><td>title</td> <td> some title</td> </tr> <tr><td>subtitle</td> <td> some subtitle</td> </tr> <tr><td>interesting_integer</td> <td> 3</td> </tr> <tr><td>interesting_float</td> <td> 6.283185307179586</td> </tr> <tr><td>big_array</td> <td> np.array(shape=(200, 250)) </td> </tr>  </table></div>
 
 
 
@@ -525,13 +530,13 @@ q
 
 
 
-<h1>some title</h1><h2>some subtitle</h2><p>interesting integer:0003</p><p>interesting float:6.283</p><hr/>
+<div><h1>some title</h1><h2>some subtitle</h2><p>interesting integer:0003</p><p>interesting float:6.283</p><hr/></div>
 
 
 
 ## Gotchas
 
-* `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`
+* `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`. I bet that the opinion will be divided on this behaviour.
 
 
 ## Attributions
@@ -553,5 +558,3 @@ https://pypi.org/project/python-box/
 ## License
 
 MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
-
-
