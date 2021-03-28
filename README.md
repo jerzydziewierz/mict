@@ -1,11 +1,12 @@
 # `mict` -- middle-ground between `dict` and a `class`
 
-Provides `MATLAB`-like setting/storage of items in a dict (dictionary) and a handful of interactivity tools.
+Provides `MATLAB`-like setting/storage of items in a `dict` (dictionary) and a handful of interactivity tools.
 
 `mict` is intended to be a middle ground between `dict` and full fledged `class` / `object` pattern for structured data storage.
 
-It does a bit more than basic `dict`, but does not attempt to superseede pandas, numpy nor other advanced data storage tools
+It does a bit more than basic `dict`, but does not attempt to supersede pandas, numpy nor other advanced data storage tools
 
+{:toc}
 
 
 ## Installation
@@ -286,11 +287,11 @@ super(handybeam.dict,q).__repr__()
 
 # Advanced uses
 
-## Show the shape of big variables, instead of their content.
+## Show the shape of big variables, instead of their content
 
 Much of the actual research code will use numpy arrays or long lists. These are typically unwieldy to just display as-is. 
 
-`mict` provides a default `reprstyler`, `reprstyler_basic_html`  which has a way to only display the shape of the numpy/tensorflow/pytorch/jax array, instead of the contents. You will find that this is often what you need displayed.
+`mict` provides a default `reprstyler`, `reprstyler_basic_html`  which has a way to only display the shape of the `numpy`/`tensorflow`/`pytorch`/`jax` array, instead of the contents. You will find that this is often what you need displayed instead of the regular dandruff.
 
 
 ```python
@@ -539,7 +540,7 @@ q
 * `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`. I bet that the opinion will be divided on this behaviour.
 
 
-## Attributions
+# Attributions
 
 Happily copypasted from https://stackoverflow.com/questions/2352181/how-to-use-a-dot-to-access-members-of-dictionary , and modified only slightly.
 
@@ -548,13 +549,13 @@ then, extended a bit.
 then, a bit more, with optional reprstyler. See the source code for `self.__repr__()`.
 
 
-## Related packages 
+# Related packages 
 
 see also: 
 
 https://pypi.org/project/python-box/
 
 
-## License
+# License
 
 MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
