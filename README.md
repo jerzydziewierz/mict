@@ -281,10 +281,10 @@ If you want a different styler for `jupyter`, and a different one for `console-o
 If you really feel like it, this could be extended to markdown, png, svg and other visualizers supported by `jupyter`.
 
 
-Importantly, you can still see the classic `dict` __repr__ function (lists all keys/values) using
+You can still see the classic `dict` __repr__ function (lists all keys/values) using
 
 ```python
-super(handybeam.dict,q).__repr__()
+super(mict,q).__repr__()
 ```
 
 # Advanced uses
@@ -523,13 +523,13 @@ q
 
 ```python
 def custom_html_styler(this):
-    output = f'<h1>{this.title}</h1>'
-    output = f'{output}<h2>{this.subtitle}</h2>'
-    output = f'{output}<p>interesting integer:{this.interesting_integer:04d}</p>'
-    output = f'{output}<p>interesting float:{this.interesting_float:0.{this.interesting_integer}f}</p>'
-    output = f'{output}<p>some stats: {this.big_array.std()=:0.4f}</p>'
-    output = f'{output}<hr/>'
-    return output
+    out = f'<h1>{this.title}</h1>'
+    out = f'{out}<h2>{this.subtitle}</h2>'
+    out = f'{out}<p>interesting integer:{this.interesting_integer:04d}</p>'
+    out = f'{out}<p>interesting float: {this.interesting_float:0.{this.interesting_integer}f}</p>'
+    out = f'{out}<p>some stats: {this.big_array.std()=:0.4f}</p>'
+    out = f'{out}<hr/>'
+    return out
 
 q.reprstyler_html = custom_html_styler
 q
@@ -547,13 +547,29 @@ q
 * `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`. I bet that the opinion will be divided on this behaviour.
 
 
+
+# To-Dos
+
+* Add testing support functionality
+  * are two `mict` nearly equal? how equal they are?
+* Add set operations
+  * difference & intersection operations
+* Decide on what to do when requested element is not in the `mict`
+  * Currently, when the requested element is not in `mict`, it returns a warning and a `None`. This might not suit the taste of many people. 
+* More examples on typical usage
+  * usage in the context of pandas, numpy/jax e.t.c.
+* Far future: widget-creation-helper tools
+  * Increment/decrement/run widget
+
 # Attributions
 
 Happily copypasted from https://stackoverflow.com/questions/2352181/how-to-use-a-dot-to-access-members-of-dictionary , and modified only slightly.
 
-then, extended a bit.
+Then, extended a bit.
 
-then, a bit more, with optional reprstyler. See the source code for `self.__repr__()`.
+Then, a bit more, with optional reprstyler. 
+
+See the source code for `self.__repr__()`.
 
 
 # Related packages 
