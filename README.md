@@ -582,3 +582,8 @@ https://pypi.org/project/python-box/
 # License
 
 MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
+
+# Accolades
+
+![image-20210329074600460](README.assets/image-20210329074600460.png)
+
