@@ -70,7 +70,9 @@ def reprstyler_basic_html(subject=None):
         elif _numpy_available and isinstance(subject[key], np.ndarray):
             txt = f'{txt} <td> np.array(shape={subject[key].shape}) </td>'
         elif _tensorflow_available and tf.is_tensor(subject[key]):
-            txt = f'{txt} <td> tf tensor(shape={subject[key].shape}) </td>'
+            txt = f'{txt} <td> tf.tensor(shape={subject[key].shape}) </td>'
+        elif isinstance(subject[key], list) and len(subject[key]) > 2:
+            txt = f'{txt} <td>list: len(this.{key})={len(subject[key])}</td>'
         elif isinstance(subject[key], mict):
             inner_mict = subject[key]
             inner_mict_visualiser_result = inner_mict._repr_html_()
