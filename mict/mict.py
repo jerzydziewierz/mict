@@ -209,6 +209,22 @@ class mict(dict):
         """This is used by pickle when deserializing an object."""
         self.__dict__.update(data)
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# # # # # # # #  operator overloading # # # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+    def __add__(self, other):
+        """overload the 'add' operator """
+        return self.update(other)
+
+
+    def __mul__(self,other):
+        """produce an intersection of two dictionaries"""
+        raise NotImplemented('intersection not yet implemented.')
+
+
+
     def to_pickle(self, filename):
         """ Save the contents of this object to a file using pickle.
 

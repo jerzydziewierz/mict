@@ -567,7 +567,9 @@ Happily copypasted from https://stackoverflow.com/questions/2352181/how-to-use-a
 
 Then, extended a bit.
 
-Then, a bit more, with optional reprstyler. 
+Then, a bit more, with optional reprstyler on text and html. 
+
+Then again with documentation and `mict.from_locals()` . It is now big enough to be publication worthy.
 
 See the source code for `self.__repr__()`.
 
@@ -587,3 +589,4 @@ MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENS
 
 ![image-20210329074600460](README.assets/image-20210329074600460.png)
 
+![image-20210329091637701](README.assets/image-20210329091637701.png)
