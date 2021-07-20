@@ -62,11 +62,22 @@ def reprstyler_basic_html(subject=None):
 
         # display the content according to type
         if isinstance(subject[key], float):
-            txt = f'{txt} <td> {subject[key]}</td>'
+            txt = f'{txt} <td> {subject[key]:0.2f}</td>'
         elif isinstance(subject[key], int):
             txt = f'{txt} <td> {subject[key]}</td>'
         elif isinstance(subject[key], str):
             txt = f'{txt} <td> {subject[key]}</td>'
+        elif isinstance(subject[key], list):
+            this_list = subject[key]
+            if len(this_list)>5:
+                first_element_type=str(type(this_list[0]))
+                txt = f'{txt} <td> list({first_element_type},...) len={len(this_list)} </td>'
+            else:
+                proposed_str = this_list.__repr__()
+                if len(proposed_str)<40:
+                    txt = f'{txt} <td> {proposed_str}</td>'
+                else:
+                    txt = f'{txt} <td> {proposed_str[0:40]} (...)</td>'
         elif _numpy_available and isinstance(subject[key], np.ndarray):
             txt = f'{txt} <td> np.array(shape={subject[key].shape}) </td>'
         elif _tensorflow_available and tf.is_tensor(subject[key]):
