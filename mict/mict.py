@@ -302,7 +302,7 @@ class mict(dict):
             except:
                 pass
 
-        if isinstance(field, list):
+        if hasattr(field, '__iter__'): # check if iterable. It could be list, dict, set or other object, even a mict.
             for subfield in field:
                 do(subfield)
         else:
