@@ -81,7 +81,13 @@ class mict(dict):
 
     """
 
-    def __init__(self, args={}, reprstyler_html=reprstyler_basic_html, **kwargs):
+    # perma-set the reprstyler to reprstyler_basic_html
+    # -- I hope this enables monkeypatching later,
+    # -- I hope that reprstyler_html will now not need to be added to the dictionary contents
+    # reprstyler_html = reprstyler_basic_html
+
+
+    def __init__(self, args={}, **kwargs):
         """ starts the instance.
 
         example use:
@@ -109,9 +115,11 @@ class mict(dict):
         for key, value in kwargs.items():
             self.update({key: value})
 
-        # if reprstyler is not set to "none",
-        if not 'reprstyler_html' in self.__dict__.keys():
-            self.update({'reprstyler_html': reprstyler_html})
+        # !! Obsolete: Now, reprstyler is not in the dict.
+        # # if reprstyler is not set to "none",
+        # if not 'reprstyler_html' in self.__dict__.keys():
+        #     self.update({'reprstyler_html': reprstyler_html})
+
 
     def __getattr__(self, attr):
         """ responds to :code:`answer=dict.attribute`"""
@@ -177,10 +185,11 @@ class mict(dict):
         """just wrap to self.__repr__()"""
         return self.__repr__()
 
+    reprstyler_html = 'html'
     def _repr_html_(self):
         if self.reprstyler_html is not None:
             try:
-                return self.reprstyler_html(self)
+                return reprstyler_basic_html(self)
             except Exception as reprstyler_html_fail:
                 print(reprstyler_html_fail)
                 print('-- falling back to super.__repr__() --')
@@ -189,7 +198,7 @@ class mict(dict):
             # at this point, if reprstyler is set, use it. Otherwise it will fall back too early and all Jupyter output would be bad.
             if self.reprstyler is not None:
                 try:
-                    return self.reprstyler(self)
+                    return reprstyler_basic_html(self)
                 except Exception as reprstyler_fail:
                     print(reprstyler_fail)
                     print('-- falling back to super...')
@@ -219,6 +228,10 @@ class mict(dict):
         with open(filename, 'wb') as file_output:
             pickle.dump(self, file_output)
         return True
+
+    def set_repr(self, new_function=Exception):
+        self.__repr_html_ = new_function
+        return self
 
     @staticmethod
     def from_pickle(filename):
