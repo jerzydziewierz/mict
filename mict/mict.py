@@ -280,6 +280,28 @@ class mict(dict):
         result.reprstyler_html = reprstyler_basic_html
         return result
 
+    def tpop(self, field, verbose=False):
+        # print(f'popping {field}')
+        def do(subfield):
+            try:
+                _ = self.pop(subfield)
+                if verbose: print(f'popped {subfield}')
+            except:
+                pass
+
+        if isinstance(field, list):
+            for subfield in field:
+                do(subfield)
+        else:
+            do(field)
+        if verbose:
+            print(f'keys: ', end='')
+            for key in self.keys():
+                if key !='reprstyler_html':
+                    print(f'{key}, ', end='')
+            print('\b\b')
+        return self
+
 
 
 

@@ -31,6 +31,13 @@ try:
 except:
     pass
 
+_pandas_available = False
+try:
+    import pandas
+    _pandas_available = True
+except:
+    pass
+
 
 def reprstyler_basic(subject=None):
     txt = 'keys:'
@@ -59,7 +66,7 @@ def reprstyler_basic_html(subject=None):
 
         # begin row, display key name
         txt = f'{txt}<tr><td>{key}</td>'
-
+        value = subject[key]
         # display the content according to type
         if isinstance(subject[key], float):
             txt = f'{txt} <td> {subject[key]:0.2f}</td>'
@@ -82,6 +89,9 @@ def reprstyler_basic_html(subject=None):
             txt = f'{txt} <td> np.array(shape={subject[key].shape}) </td>'
         elif _tensorflow_available and tf.is_tensor(subject[key]):
             txt = f'{txt} <td> tf tensor(shape={subject[key].shape}) </td>'
+        elif _pandas_available and isinstance(value, pandas.core.frame.DataFrame):
+            col_names = f''.join(f'{v},</br>' for v in value.columns)
+            txt = f'{txt}<td>pandas.DataFrame(columns=([</br>{col_names}]) --- rows:{len(value)}.</td>'
         elif isinstance(subject[key], mict):
             inner_mict = subject[key]
             inner_mict_visualiser_result = inner_mict._repr_html_()
