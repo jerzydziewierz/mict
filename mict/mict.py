@@ -214,6 +214,11 @@ class mict(dict):
         """
         return self.__dict__
 
+    def _asdict(self):
+        """ This is used by "simplejson", probably. To be verified
+        """
+        return self
+
     def __setstate__(self, data):
         """This is used by pickle when deserializing an object."""
         self.__dict__.update(data)
@@ -314,6 +319,15 @@ class mict(dict):
                     print(f'{key}, ', end='')
             print('\b\b')
         return self
+
+    def unpack_to_locals(self):
+        """ update locals with the contents of the mict.
+
+        Warning: This is potentially dangerous operation with werid consequences.
+
+        """
+        import inspect
+        inspect.currentframe().f_back.f_locals.update(self)
 
 
 
