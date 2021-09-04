@@ -1,5 +1,7 @@
 # `mict` -- middle-ground between `dict` and a `class`
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jerzydziewierz/mict/HEAD?filepath=demo.ipynb)
+
 Provides `MATLAB`-like setting/storage of items in a `dict` (dictionary) and a handful of interactivity tools.
 
 `mict` is intended to be a middle ground between `dict` and full fledged `class` / `object` pattern for structured data storage.
@@ -41,6 +43,16 @@ python -m pip -e .
 
 
 This package attempts to use [PEP 517](https://www.python.org/dev/peps/pep-0517)  and it's implementation, [setuptools Quickstart — setuptools 54.2.0 documentation](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
+
+# Demo
+
+Online demo with binder: 
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jerzydziewierz/mict/HEAD?filepath=demo.ipynb)
+
+local demo: please see `demo.ipynb` -- a jupyter notebook.
+
+
 
 # Basic usage
 
