@@ -167,6 +167,7 @@ class mict(dict):
         super(mict, self).__delitem__(key)
         del self.__dict__[key]
 
+    reprstyler = None
     def __repr__(self):
         """
         If available, calls the reprstyler. If not available,just calls the default __repr__()
@@ -185,11 +186,22 @@ class mict(dict):
         """just wrap to self.__repr__()"""
         return self.__repr__()
 
-    reprstyler_html = 'html'
+    reprstyler_html = reprstyler_basic_html
+
+
     def _repr_html_(self):
+        """Repr styling dispatcher for jupyter notebook.
+
+        Concept:
+        -> If `reprstyler_html` is set, use it
+            -> if it fails, print error
+        -> if `reprstyler` is set, use it
+            ->  if it fails, print error
+        -> on error, call the super(mict, self).__repr__()
+        """
         if self.reprstyler_html is not None:
             try:
-                return reprstyler_basic_html(self)
+                return self.reprstyler_html(self)
             except Exception as reprstyler_html_fail:
                 print(reprstyler_html_fail)
                 print('-- falling back to super.__repr__() --')
@@ -198,13 +210,17 @@ class mict(dict):
             # at this point, if reprstyler is set, use it. Otherwise it will fall back too early and all Jupyter output would be bad.
             if self.reprstyler is not None:
                 try:
-                    return reprstyler_basic_html(self)
+                    return self.reprstyler(self)
                 except Exception as reprstyler_fail:
                     print(reprstyler_fail)
                     print('-- falling back to super...')
                     return super(mict, self).__repr__()
             else:  # if reprstyler not set
                 return super(mict, self).__repr__()
+
+    def set_repr(self, new_function=Exception):
+        self.reprstyler_html = new_function
+        return self
 
     # turns out that these two methods are essential to enable pickling of this object
     #  https://stackoverflow.com/questions/2049849/why-cant-i-pickle-this-object
@@ -234,9 +250,7 @@ class mict(dict):
             pickle.dump(self, file_output)
         return True
 
-    def set_repr(self, new_function=Exception):
-        self.__repr_html_ = new_function
-        return self
+
 
     @staticmethod
     def from_pickle(filename):
@@ -253,7 +267,7 @@ class mict(dict):
 
     @staticmethod
     def from_locals(reprstyler_html=reprstyler_basic_html):
-        """generates a mdict from local variables.
+        """generates a mict from local variables.
 
         Primary use is intended to be a return type from functions.
 

@@ -48,8 +48,9 @@ def reprstyler_basic(subject=None):
     return txt
 
 
-def reprstyler_basic_html(subject=None):
+def reprstyler_basic_html(subject=None, second_arg=None):
     from .mict import mict
+    # print(second_arg) ??? why would it give me two arguments?? python bug?
     txt = ''
     if 'type' in subject.keys():
         txt = f'{txt}<em>Type:</em> {subject.type}; '
@@ -70,6 +71,18 @@ def reprstyler_basic_html(subject=None):
         # display the content according to type
         if isinstance(subject[key], float):
             txt = f'{txt} <td> {subject[key]:0.2f}</td>'
+        elif callable(subject[key]):
+            # display a function name and signature
+            qf = subject[key]
+            fname = qf.__code__.co_name
+            if fname[0] == '<': # in case if it is a lambda, strip the html tag
+                fname=fname[1:-1]
+            rstr = f'{key}'
+            rstr = f'{rstr}('
+            for var_ in qf.__code__.co_varnames:
+                rstr = f'{rstr}{var_},'
+            rstr = f'{rstr[:-1]})'
+            txt = f'{txt}<td> <code>{rstr}</code></td>'
         elif isinstance(subject[key], int):
             txt = f'{txt} <td> {subject[key]}</td>'
         elif isinstance(subject[key], str):
