@@ -239,18 +239,20 @@ class mict(dict):
         """This is used by pickle when deserializing an object."""
         self.__dict__.update(data)
 
+
+
     def to_pickle(self, filename):
         """ Save the contents of this object to a file using pickle.
 
         :param filename: file name to attempt to write to. Overwritten if already exists.
         :return: True on success.
         """
-        import pickle
+        import dill
         with open(filename, 'wb') as file_output:
-            pickle.dump(self, file_output)
+            dill.dump(self, file_output)
         return True
 
-
+    to_dill = to_pickle
 
     @staticmethod
     def from_pickle(filename):
@@ -260,10 +262,12 @@ class mict(dict):
         :param filename: file name to load
         :return: whatever pickle thinks that was there under file name provided.
         """
-        import pickle
+        import dill
         with open(filename, 'rb') as file_input:
-            data = pickle.load(file_input)
+            data = dill.load(file_input)
         return data
+
+    from_dill = from_pickle
 
     @staticmethod
     def from_locals(reprstyler_html=reprstyler_basic_html):
