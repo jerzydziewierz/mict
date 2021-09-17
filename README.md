@@ -1,8 +1,8 @@
-# `mict` -- middle-ground between `dict` and a `class`
+## `mict` -- middle-ground between `dict` and a `class`
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jerzydziewierz/mict/HEAD?filepath=demo.ipynb)
 
-Provides `MATLAB`-like setting/storage of items in a `dict` (dictionary) and a handful of interactivity tools.
+Provides `MATLAB`-struct-like dot notation for setting and of items in a `dict` (dictionary), and a handful of interactivity tools.
 
 `mict` is intended to be a middle ground between `dict` and full fledged `class` / `object` pattern for structured data storage.
 
@@ -13,7 +13,7 @@ It does a bit more than basic `dict`, but does not attempt to supersede pandas, 
 [TOC]
 
 
-# Installation
+## Installation
 
 Try installing with `pip`, grabbing it straight from `github`:
     
@@ -42,9 +42,9 @@ python -m pip -e .
 
 
 
-This package attempts to use [PEP 517](https://www.python.org/dev/peps/pep-0517)  and it's implementation, [setuptools Quickstart — setuptools 54.2.0 documentation](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
+This package intends to use [PEP 517](https://www.python.org/dev/peps/pep-0517)  and it's implementation, [setuptools Quickstart — setuptools 54.2.0 documentation](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
 
-# Demo
+## Demo
 
 Online demo with binder: 
 
@@ -54,7 +54,7 @@ local demo: please see `demo.ipynb` -- a jupyter notebook.
 
 
 
-# Basic usage
+## Basic usage
 
 Always remember that `mict` inherits from `dict` and hence, all the operations that are valid for `dict` are also valid for `mict`. On top of that, new operations are available.
 
@@ -557,7 +557,15 @@ q
 ## Gotchas
 
 * `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`. I bet that the opinion will be divided on this behaviour.
+* `dict` keys that contain a dot, cannot be used to access the field in dot-notation mode.
 
+For example:
+
+```python 
+q=mict()
+q['a.b']=3
+q.a.b  # UserWarning and AttributeError - no key "a" in this dictionary.
+```
 
 
 # To-Dos
@@ -566,12 +574,11 @@ q
   * are two `mict` nearly equal? how equal they are?
 * Add set operations
   * difference & intersection operations
+    * Note that Python 3.9 brings in new, vastly useful dict operations for merging and updating: `|` and `|=` , see https://docs.python.org/3/whatsnew/3.9.html#dictionary-merge-update-operators 
 * Decide on what to do when requested element is not in the `mict`
   * Currently, when the requested element is not in `mict`, it returns a warning and a `None`. This might not suit the taste of many people. 
 * More examples on typical usage
   * usage in the context of pandas, numpy/jax e.t.c.
-* Far future: widget-creation-helper tools
-  * Increment/decrement/run widget
 
 # Attributions
 

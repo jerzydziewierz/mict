@@ -7,3 +7,8 @@ tmp/**
 
 
 
+/build/
+/mict.egg-info/entry_points.txt
+/mict.egg-info/SOURCES.txt
+/mict.egg-info/requires.txt
+/mict.egg-info/PKG-INFO
