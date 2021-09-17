@@ -150,7 +150,8 @@ class mict(dict):
         return self.get(attr)
 
     def __setattr__(self, key, value):
-        """ responds to :code:`dict.key=value` """
+        """ responds to :code:`dict.key=value`
+        """
         self.__setitem__(key, value)
 
     def __setitem__(self, key, value):
