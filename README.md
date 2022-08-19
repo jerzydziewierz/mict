@@ -600,30 +600,9 @@ https://pypi.org/project/python-box/
 
 # License
 
-<<<<<<< HEAD
 moidified MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
+License, Copyright (c) 2015-2022 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
 
-== We're Using GitHub Under Protest ==
-
-This project is currently hosted on GitHub.  This is not ideal; GitHub is a
-proprietary, trade-secret system that is not Free and Open Souce Software
-(FOSS).  We are deeply concerned about using a proprietary system like GitHub
-to develop our FOSS project.   We urge you to read about the
-[Give up GitHub](https://GiveUpGitHub.org) campaign from
-[the Software Freedom Conservancy](https://sfconservancy.org) to understand
-some of the reasons why GitHub is not a good place to host FOSS projects.
-
-If you are a contributor who personally has already quit using GitHub, good for you! A link will be available here when I do the same.
-
-Any use of self project's code by GitHub Copilot, past or present, is done
-without our permission.  We do not consent to GitHub's use of self project's
-code in Copilot. See my [LICENSE](LICENSE) file for details.
-
-![Logo of the GiveUpGitHub campaign](https://sfconservancy.org/img/GiveUpGitHub.png)
-
-=======
-moidified MIT License, Copyright (c) 2015-2022 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
->>>>>>> refs/remotes/origin/main
 
 # Accolades
 
