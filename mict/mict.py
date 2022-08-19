@@ -1,11 +1,10 @@
 from warnings import warn
 from .reprstylers_generic import reprstyler_basic_html
 from .reprstylers_generic import reprstyler_basic
+import collections
 
 
-
-
-class mict(dict):
+class mict(dict, collections.abc.Iterable):
     """Provides matlab-like setting/storage of items in a dict (dictionary) and a handful of interactivity tools.
 
     `mict` is intended to be a middle ground between dict and full fledged object for data storage
@@ -174,7 +173,6 @@ class mict(dict):
             raise ValueError(f'can only substract other dict from this dict; got {type(other)=}')
         result = mict()
         for key in self:
-            print(f'checking {key}...')
             if key in other.keys():
                 # check for value difference
                 if self[key] != other[key]:
@@ -182,7 +180,7 @@ class mict(dict):
                 else:
                     pass  # no difference.
             else:  # key not in other.keys()
-                result[key] = None
+                pass
         return result
 
     def __add__(self, other):
@@ -369,10 +367,6 @@ class mict(dict):
                     print(f'{key}, ', end='')
             print('\b\b')
         return self
-
-    def to_locals(self):
-        """alias for unpack_to_locals"""
-        return self.unpack_to_locals()
 
 
     def unpack_to_locals(self):
