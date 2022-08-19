@@ -46,7 +46,7 @@ class mict(dict):
     q
     ```
 
-    If you really feel like it, this could be extended to markdown, png, svg and other visualizers supported by jupyter.
+    If you really feel like it, self could be extended to markdown, png, svg and other visualizers supported by jupyter.
 
     Importantly, you can still see the regular dict __repr__ (lists all keys/values) using
 
@@ -82,7 +82,7 @@ class mict(dict):
     """
 
     # perma-set the reprstyler to reprstyler_basic_html
-    # -- I hope this enables monkeypatching later,
+    # -- I hope self enables monkeypatching later,
     # -- I hope that reprstyler_html will now not need to be added to the dictionary contents
     # reprstyler_html = reprstyler_basic_html
 
@@ -111,7 +111,7 @@ class mict(dict):
 
         # add a hard-coded value "reprstyler". This will be used to redirect repr to the given function
 
-        # self.update({'reprstyler': None})  # Note: do not depend on this key being in the dictionary -- I might decide to not put it in as default
+        # self.update({'reprstyler': None})  # Note: do not depend on self key being in the dictionary -- I might decide to not put it in as default
         for key, value in kwargs.items():
             self.update({key: value})
 
@@ -139,10 +139,10 @@ class mict(dict):
                             '_repr_latex_',
                             '_repr_json_',
                             '_repr_javascript_',
-                            'is_tensor_like',  # tensorflow uses this to check for tensors
+                            'is_tensor_like',  # tensorflow uses self to check for tensors
                             ):
                 # give meaningful error message:
-                warn(f'no key "{attr}" in this dictionary. \nvalid keys are {[key for key in self.keys()]}',
+                warn(f'no key "{attr}" in self dictionary. \nvalid keys are {[key for key in self.keys()]}',
                      stacklevel=2)
                 warn('in ', stacklevel=3)
                 warn('in ', stacklevel=4)
@@ -160,13 +160,44 @@ class mict(dict):
         self.__dict__.update({key: value})
 
     def __delattr__(self, item):
-        """ ? I don't know what this does."""
+        """ ? I don't know what self does."""
         self.__delitem__(item)
 
     def __delitem__(self, key):
-        """ ? I don't know what this does."""
+        """ ? I don't know what self does."""
         super(mict, self).__delitem__(key)
         del self.__dict__[key]
+
+    def __sub__(self, other):
+        """ subtracts two dictionaries """
+        if not isinstance(other, dict):
+            raise ValueError(f'can only substract other dict from this dict; got {type(other)=}')
+        result = mict()
+        for key in self:
+            print(f'checking {key}...')
+            if key in other.keys():
+                # check for value difference
+                if self[key] != other[key]:
+                    result[key] = other[key]
+                else:
+                    pass  # no difference.
+            else:  # key not in other.keys()
+                result[key] = None
+        return result
+
+    def __add__(self, other):
+        """ adds two dictionaries, returns a new one (not a reference to self) """
+        import copy
+        result = copy.copy(self)
+        if not isinstance(other, dict):
+            raise ValueError(f'can only add other dict to this dict; got {type(other)=}')
+        for key in other:
+            if key in self.keys():
+                warn(message=f'key {key} already exists in first operand. NOT overwritting.', category=UserWarning, stacklevel=2)
+                pass
+            else:
+                result[key] = other[key]
+        return result
 
     reprstyler = None
     def __repr__(self):
@@ -208,7 +239,7 @@ class mict(dict):
                 print('-- falling back to super.__repr__() --')
                 return super(mict, self).__repr__()  # note that dict has no _repr_html_() to call.
         else:  # if reprstyler_html not set
-            # at this point, if reprstyler is set, use it. Otherwise it will fall back too early and all Jupyter output would be bad.
+            # at self point, if reprstyler is set, use it. Otherwise it will fall back too early and all Jupyter output would be bad.
             if self.reprstyler is not None:
                 try:
                     return self.reprstyler(self)
@@ -223,7 +254,7 @@ class mict(dict):
         self.reprstyler_html = new_function
         return self
 
-    # turns out that these two methods are essential to enable pickling of this object
+    # turns out that these two methods are essential to enable pickling of self object
     #  https://stackoverflow.com/questions/2049849/why-cant-i-pickle-this-object
     def __getstate__(self):
         """This is used by pickle and other serializers.
@@ -243,7 +274,7 @@ class mict(dict):
 
 
     def to_pickle(self, filename):
-        """ Save the contents of this object to a file using pickle.
+        """ Save the contents of self object to a file using pickle.
 
         :param filename: file name to attempt to write to. Overwritten if already exists.
         :return: True on success.
@@ -258,7 +289,7 @@ class mict(dict):
     @staticmethod
     def from_pickle(filename):
         """ load something from file using pickle.
-        note that this DOES NOT check what exactly gets loaded with pickle -- it just returns whatever was there in the pickle file.
+        note that self DOES NOT check what exactly gets loaded with pickle -- it just returns whatever was there in the pickle file.
 
         :param filename: file name to load
         :return: whatever pickle thinks that was there under file name provided.

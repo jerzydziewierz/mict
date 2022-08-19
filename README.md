@@ -225,7 +225,7 @@ Note that `reprstyler_html` will display any html you give it, including images,
 
 ```python
 q=mict(fill='blue',r=15)
-q.reprstyler_html=lambda this:f'<svg width="200" height="100" ><circle cx="50" cy="50" r="{this.r}" fill="{this.fill}" /></svg>'
+q.reprstyler_html=lambda self:f'<svg width="200" height="100" ><circle cx="50" cy="50" r="{self.r}" fill="{self.fill}" /></svg>'
 q
 ```
 
@@ -290,7 +290,7 @@ If you want a different styler for `jupyter`, and a different one for `console-o
 
 ## Other output formats
 
-If you really feel like it, this could be extended to markdown, png, svg and other visualizers supported by `jupyter`.
+If you really feel like it, self could be extended to markdown, png, svg and other visualizers supported by `jupyter`.
 
 
 You can still see the classic `dict` __repr__ function (lists all keys/values) using
@@ -305,7 +305,7 @@ super(mict,q).__repr__()
 
 Much of the actual research code will use numpy arrays or long lists. These are typically unwieldy to just display as-is. 
 
-`mict` provides a default `reprstyler`, `reprstyler_basic_html`  which has a way to only display the shape of the `numpy`/`tensorflow`/`pytorch`/`jax` array, instead of the contents. You will find that this is often what you need displayed instead of the regular dandruff.
+`mict` provides a default `reprstyler`, `reprstyler_basic_html`  which has a way to only display the shape of the `numpy`/`tensorflow`/`pytorch`/`jax` array, instead of the contents. You will find that self is often what you need displayed instead of the regular dandruff.
 
 
 ```python
@@ -534,12 +534,12 @@ q
 
 
 ```python
-def custom_html_styler(this):
-    out = f'<h1>{this.title}</h1>'
-    out = f'{out}<h2>{this.subtitle}</h2>'
-    out = f'{out}<p>interesting integer:{this.interesting_integer:04d}</p>'
-    out = f'{out}<p>interesting float: {this.interesting_float:0.{this.interesting_integer}f}</p>'
-    out = f'{out}<p>some stats: {this.big_array.std()=:0.4f}</p>'
+def custom_html_styler(self):
+    out = f'<h1>{self.title}</h1>'
+    out = f'{out}<h2>{self.subtitle}</h2>'
+    out = f'{out}<p>interesting integer:{self.interesting_integer:04d}</p>'
+    out = f'{out}<p>interesting float: {self.interesting_float:0.{self.interesting_integer}f}</p>'
+    out = f'{out}<p>some stats: {self.big_array.std()=:0.4f}</p>'
     out = f'{out}<hr/>'
     return out
 
@@ -550,13 +550,13 @@ q
 
 
 
-<div><h1>some title</h1><h2>some subtitle</h2><p>interesting integer:0003</p><p>interesting float:6.283</p><p>some stats: this.big_array.std()=0.2897</p><hr/></div>
+<div><h1>some title</h1><h2>some subtitle</h2><p>interesting integer:0003</p><p>interesting float:6.283</p><p>some stats: self.big_array.std()=0.2897</p><hr/></div>
 
 
 
 ## Gotchas
 
-* `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`. I bet that the opinion will be divided on this behaviour.
+* `mict` does not throw an error when trying to access undefined field. Instead, it returns `None`. I bet that the opinion will be divided on self behaviour.
 * `dict` keys that contain a dot, cannot be used to access the field in dot-notation mode.
 
 For example:
@@ -564,7 +564,7 @@ For example:
 ```python 
 q=mict()
 q['a.b']=3
-q.a.b  # UserWarning and AttributeError - no key "a" in this dictionary.
+q.a.b  # UserWarning and AttributeError - no key "a" in self dictionary.
 ```
 
 
@@ -600,7 +600,30 @@ https://pypi.org/project/python-box/
 
 # License
 
+<<<<<<< HEAD
+moidified MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
+
+== We're Using GitHub Under Protest ==
+
+This project is currently hosted on GitHub.  This is not ideal; GitHub is a
+proprietary, trade-secret system that is not Free and Open Souce Software
+(FOSS).  We are deeply concerned about using a proprietary system like GitHub
+to develop our FOSS project.   We urge you to read about the
+[Give up GitHub](https://GiveUpGitHub.org) campaign from
+[the Software Freedom Conservancy](https://sfconservancy.org) to understand
+some of the reasons why GitHub is not a good place to host FOSS projects.
+
+If you are a contributor who personally has already quit using GitHub, good for you! A link will be available here when I do the same.
+
+Any use of self project's code by GitHub Copilot, past or present, is done
+without our permission.  We do not consent to GitHub's use of self project's
+code in Copilot. See my [LICENSE](LICENSE) file for details.
+
+![Logo of the GiveUpGitHub campaign](https://sfconservancy.org/img/GiveUpGitHub.png)
+
+=======
 moidified MIT License, Copyright (c) 2015-2022 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
+>>>>>>> refs/remotes/origin/main
 
 # Accolades
 
