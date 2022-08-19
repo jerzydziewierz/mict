@@ -370,6 +370,11 @@ class mict(dict):
             print('\b\b')
         return self
 
+    def to_locals(self):
+        """alias for unpack_to_locals"""
+        return self.unpack_to_locals()
+
+
     def unpack_to_locals(self):
         """ update locals with the contents of the mict.
 

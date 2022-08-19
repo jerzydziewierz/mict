@@ -6,7 +6,7 @@ Provides `MATLAB`-struct-like dot notation for setting and of items in a `dict` 
 
 `mict` is intended to be a middle ground between `dict` and full fledged `class` / `object` pattern for structured data storage.
 
-It does a bit more than basic `dict`, but does not attempt to supersede pandas, numpy nor other advanced data storage tools
+It does a bit more than basic `dict`, but does not attempt to supersede pandas, numpy, xarray nor other advanced data storage tools
 
 
 
@@ -600,8 +600,7 @@ https://pypi.org/project/python-box/
 
 # License
 
-moidified MIT License, Copyright (c) 2015-2020 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
-License, Copyright (c) 2015-2022 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
+Modded MIT License, Copyright (c) 2015-2022 George "Dr Jerzy Dziewierz" Rey. See LICENSE file.
 
 
 # Accolades
