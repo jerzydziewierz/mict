@@ -102,7 +102,9 @@ A new `mict` instance comes with the `reprstyler_html` already set to `reprstyle
 
 ## Convenience save and load functions using pickle
 
-> **Warning**: Since the `pickle` save/load also loads executable functions (including the `reprstyler`), all the precautions that apply to `pickle` apply here. Loading untrusted files is potentially unsafe. 
+> **Warning**: Since the `pickle` save/load also loads executable functions (including the `reprstyler`), all the precautions that apply to `pickle` apply here. Loading untrusted files is potentially unsafe.
+> See https://github.com/yk/patch-torch-save and the explanation of how it works: https://www.youtube.com/watch?v=2ethDz9KnLk
+
 
 
 methods `(instance).to_pickle()` and `(class).from_pickle()` work as you would expect:
