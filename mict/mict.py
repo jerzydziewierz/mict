@@ -170,7 +170,7 @@ class mict(dict, collections.abc.Iterable):
     def __sub__(self, other):
         """ subtracts two dictionaries """
         if not isinstance(other, dict):
-            raise ValueError(f'can only substract other dict from this dict; got {type(other)=}')
+            raise ValueError(f'can only substract other dict from this dict; got type(other)={type(other)}')
         result = mict()
         for key in self:
             if key in other.keys():
@@ -188,7 +188,7 @@ class mict(dict, collections.abc.Iterable):
         import copy
         result = copy.copy(self)
         if not isinstance(other, dict):
-            raise ValueError(f'can only add other dict to this dict; got {type(other)=}')
+            raise ValueError(f'can only add other dict to this dict; got type(other)={type(other)}')
         for key in other:
             if key in self.keys():
                 warn(message=f'key {key} already exists in first operand. NOT overwritting.', category=UserWarning, stacklevel=2)
