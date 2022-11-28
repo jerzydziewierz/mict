@@ -578,7 +578,12 @@ See the source code for `self.__repr__()`.
 
 see also: 
 
+* The same idea - use dot notation for structures:
 https://pypi.org/project/python-box/
+
+
+* Lovely tensors - prints better information about tensors. 
+https://github.com/xl0/lovely-tensors
 
 
 # License
