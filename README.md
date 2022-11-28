@@ -90,7 +90,7 @@ The visualiser function in `mict` is called `reprstyler`.
 A new `mict` instance comes with the `reprstyler_html` already set to `reprstyler_basic_html` but you can, and should make your own reprstylers -- see below on how to do that.
 
 
-## Convenience save and load functions using pickle
+## Convenience save and load functions using pickle  ( serde )
 
 > **Warning**: Since the `pickle` save/load also loads executable functions (including the `reprstyler`), all the precautions that apply to `pickle` apply here. Loading untrusted files is potentially unsafe. 
 
@@ -292,6 +292,8 @@ super(mict,q).__repr__()
 # Advanced uses
 
 ## Show the shape of big variables, instead of their content
+
+> **Note**: On this topicl, only relatively basic functionality is provided here. You may want to check out https://github.com/xl0/lovely-tensors . 
 
 Much of the actual research code will use numpy arrays or long lists. These are typically unwieldy to just display as-is. 
 
