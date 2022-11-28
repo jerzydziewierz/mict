@@ -1,5 +1,7 @@
 # `mict` -- middle-ground between `dict` and a `class`
 
+**With dot-notation access to structs and dynamic pretty printing**
+
 Provides `MATLAB`-like setting/storage of items in a `dict` (dictionary) and a handful of interactivity tools.
 
 `mict` is intended to be a middle ground between `dict` and full fledged `class` / `object` pattern for structured data storage.
