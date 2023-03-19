@@ -38,6 +38,7 @@ try:
 except:
     pass
 
+import types
 
 def reprstyler_basic(subject=None):
     txt = 'keys:'
@@ -111,6 +112,9 @@ def reprstyler_basic_html(subject=None, second_arg=None):
             inner_mict = subject[key]
             inner_mict_visualiser_result = inner_mict._repr_html_()
             txt = f'{txt}<td>{inner_mict_visualiser_result}</td>'
+        elif isinstance(subject[key], types.FunctionType):
+            # do nothing special
+            txt = f'{txt}<td><strong>function: </strong>[{subject[key]}]</td>'
         else:  # any other type:
             txt = f'{txt} <td> {subject[key]} </td>'
         # end of table row

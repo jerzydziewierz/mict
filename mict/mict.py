@@ -372,7 +372,7 @@ class mict(dict, collections.abc.Iterable):
     def unpack_to_locals(self):
         """ update locals with the contents of the mict.
 
-        Warning: This is potentially dangerous operation with werid consequences.
+        Warning: This is potentially dangerous operation with weird consequences.
 
         """
         import inspect
