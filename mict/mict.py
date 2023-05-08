@@ -284,6 +284,18 @@ class mict(dict, collections.abc.Iterable):
 
     to_dill = to_pickle
 
+    def to_json(self, filename=None):
+        """
+        Serialize the contents to string with json. If filename is provided, then write to file.
+        """
+        import json
+        serialized=json.dumps(dict(self))
+        if filename is not None:
+            with open(filename, 'w') as file_output:
+                file_output.write(serialized)
+        return serialized
+
+
     @staticmethod
     def from_pickle(filename):
         """ load something from file using pickle.
@@ -296,6 +308,22 @@ class mict(dict, collections.abc.Iterable):
         with open(filename, 'rb') as file_input:
             data = dill.load(file_input)
         return data
+
+    def from_json_string(json_str):
+        """
+        Deserialize a json string into a mict object.
+        """
+        import json
+        return mict(json.loads(json_str))
+
+    def from_json_file(json_file_name)->mict:
+        """
+        Deserialize a json file into a mict object.
+        """
+        import json
+        with open(json_file_name, 'r') as json_file:
+            return mict(json.load(json_file))
+
 
     from_dill = from_pickle
 
