@@ -316,7 +316,7 @@ class mict(dict, collections.abc.Iterable):
         import json
         return mict(json.loads(json_str))
 
-    def from_json_file(json_file_name)->mict:
+    def from_json_file(json_file_name):
         """
         Deserialize a json file into a mict object.
         """
