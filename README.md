@@ -307,6 +307,8 @@ super(mict,q).__repr__()
 
 ## Show the shape of big variables, instead of their content
 
+**Note:** for an even more lovely way of displaying tensors, see [Lovely-Tensors](https://github.com/xl0/lovely-tensors) -- I might want merge that (or parts of it) into here at some point.
+
 Much of the actual research code will use numpy arrays or long lists. These are typically unwieldy to just display as-is. 
 
 `mict` provides a default `reprstyler`, `reprstyler_basic_html`  which has a way to only display the shape of the `numpy`/`tensorflow`/`pytorch`/`jax` array, instead of the contents. You will find that self is often what you need displayed instead of the regular dandruff.
