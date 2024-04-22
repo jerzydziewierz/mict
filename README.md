@@ -8,7 +8,9 @@ Provides `MATLAB`-struct-like dot notation for setting and of items in a `dict` 
 
 It does a bit more than basic `dict`, but does not attempt to supersede pandas, numpy, xarray nor other advanced data storage tools
 
+## WARNINGS
 
+This is a **research and exploration** time helper. NOT INTENDED FOR PRODUCTION CODE. Contains some quirks and promotes poor practices that will generally lower the quality of your production-time code. You have been advised.
 
 [TOC]
 
@@ -170,7 +172,7 @@ baldness score: 6.280
 
 ---
 
-As everything in `mict`, the reprstyler can and should be changed **after** initializing the `mict` storage itself
+As everything in `mict`, the reprstyler can and should be changed **after** initializing the `mict` storage itself (I know that purists will really begin to spin in their graves now!) :
 
 
 ```python
